@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 export default function App() {
+  
+
 	const questions = [
 		{
 			questionText: 'What is the capital of France?',
@@ -39,6 +41,17 @@ export default function App() {
 			],
 		},
 	];
+  const[currentQuestion,setCurrentQuestion] =useState(0);
+  const handleAnswerButtonClick = () =>{
+    const nextQuestion = currentQuestion+1;
+    
+    if(nextQuestion < questions.length  ){
+      setCurrentQuestion(nextQuestion);
+
+    }
+    
+    
+  }
 
 	return (
 		<div className='app'>
@@ -52,13 +65,10 @@ export default function App() {
 						<div className='question-count'>
 							<span>Question 1</span>/{questions.length}
 						</div>
-						<div className='question-text'>{questions[0].questionText}</div>
+						<div className='question-text'>{questions[currentQuestion].questionText}</div>
 					</div>
 					<div className='answer-section'>
-						<button>Answer 1</button>
-						<button>Answer 2</button>
-						<button>Answer 3</button>
-						<button>Answer 4</button>
+						{questions[currentQuestion].answerOptions.map((answerOptions) => <button onClick={handleAnswerButtonClick}>{answerOptions.answerText}</button>)}
 					</div>
 				</>
 			)}
